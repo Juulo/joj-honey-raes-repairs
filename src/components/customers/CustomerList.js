@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { getAllCustomers } from "../ApiManager"
 
 // useState returns an array so it can only take an array as an argument
     //* "const []" deconstructs an array
@@ -14,8 +15,7 @@ export const CustomerList = () => {
     useEffect(
         () => {
             console.log("Initial useEffect")
-            fetch("http://localhost:8088/customers")
-                .then(res => res.json())
+            getAllCustomers()
                 .then((customerArray) => {
                     setCustomers(customerArray)
                 })

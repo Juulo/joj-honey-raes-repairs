@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import { getAllEmployees } from "../ApiManager"
 
 export const Ticket = () => {
     const [ticket, set] = useState({})  // State variable for current ticket object
     const [employees, setEmployees] = useState([])
     const { ticketId } = useParams()  // Variable storing the route parameter
     const history = useHistory()
+    
     useEffect(
         () => {
             fetch(`http://localhost:8088/serviceTickets/${ticketId}?_expand=customer&_expand=employee`)
@@ -18,8 +20,7 @@ export const Ticket = () => {
 
     useEffect(
         () => {
-            fetch("http://localhost:8088/employees")
-                .then(res => res.json())
+            getAllEmployees()
                 .then((data) => {
                     setEmployees(data)
                 })

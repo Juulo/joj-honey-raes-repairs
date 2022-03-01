@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import { getTicketList } from "../ApiManager"
 import "./Tickets.css"
 
 export const TicketList = () => {
@@ -8,8 +9,7 @@ export const TicketList = () => {
     
     useEffect(
         () => {
-            fetch("http://localhost:8088/serviceTickets?_expand=employee&_expand=customer")
-                .then(res => res.json())
+            getTicketList()
                 .then((ticketArray) => {
                     updateTickets(ticketArray)
                 })
